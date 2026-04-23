@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Tajawal:wght@300;400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FDF6EC;
+    --warm-sand: #F2E8D5;
+    --caramel: #C8854A;
+    --caramel-dark: #9B5E2A;
+    --rose-dust: #E8B4A0;
+    --rose-deep: #C47B65;
+    --sage: #A8C4A2;
+    --sage-dark: #6B9966;
+    --lavender: #C4B5D4;
+    --lav-dark: #8B73A8;
+    --toffee: #8B5E3C;
+    --chocolate: #3D1F0D;
+    --text-main: #2C1810;
+    --text-muted: #7A5842;
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--cream);
+    color: var(--text-main);
+    overflow-x: hidden;
+    direction: rtl;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(200,133,74,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--caramel-dark);
+    letter-spacing: 1px;
+  }
+  .nav-logo span { color: var(--rose-deep); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--caramel); }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #FDF6EC 0%, #F5E8D0 50%, #EDD8C0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 120px 40px 80px;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: floatBig 8s ease-in-out infinite;
+  }
+  .hbc1 { width: 600px; height: 600px; background: var(--caramel); top: -200px; right: -150px; animation-delay: 0s; }
+  .hbc2 { width: 400px; height: 400px; background: var(--rose-dust); bottom: -100px; left: -100px; animation-delay: 2s; }
+  .hbc3 { width: 250px; height: 250px; background: var(--sage); top: 30%; left: 5%; animation-delay: 4s; }
+
+  @keyframes floatBig {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 750px; }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(200,133,74,0.15);
+    color: var(--caramel-dark);
+    border: 1px solid rgba(200,133,74,0.3);
+    padding: 8px 24px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+    animation: fadeSlideDown 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 90px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--chocolate);
+    margin-bottom: 24px;
+    animation: fadeSlideDown 0.8s 0.2s ease both;
+  }
+  .hero-title .accent { color: var(--caramel); }
+  .hero-title .accent2 { color: var(--rose-deep); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    animation: fadeSlideDown 0.8s 0.4s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    animation: fadeSlideDown 0.8s 0.6s ease both;
+  }
+
+  .btn-primary {
+    background: var(--caramel);
+    color: white;
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Tajawal', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 32px rgba(200,133,74,0.4);
+  }
+  .btn-primary:hover { background: var(--caramel-dark); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(200,133,74,0.5); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--caramel-dark);
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Tajawal', sans-serif;
+    border: 2px solid var(--caramel);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { background: rgba(200,133,74,0.08); transform: translateY(-3px); }
+
+  .hero-floating-items {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    pointer-events: none;
+  }
+  .float-item {
+    position: absolute;
+    font-size: 48px;
+    opacity: 0.12;
+    animation: floatItem 6s ease-in-out infinite;
+  }
+  .fi1 { top: 15%; left: 8%; animation-delay: 0s; }
+  .fi2 { top: 20%; right: 10%; animation-delay: 1.5s; font-size: 36px; }
+  .fi3 { bottom: 20%; left: 12%; animation-delay: 3s; font-size: 40px; }
+  .fi4 { bottom: 25%; right: 8%; animation-delay: 0.5s; }
+  .fi5 { top: 45%; left: 3%; animation-delay: 2s; font-size: 30px; }
+  .fi6 { top: 60%; right: 4%; animation-delay: 4s; font-size: 32px; }
+
+  @keyframes floatItem {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(5deg); }
+    66% { transform: translateY(10px) rotate(-3deg); }
+  }
+
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTIONS COMMON ===== */
+  section { padding: 100px 60px; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  .section-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--chocolate);
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    font-weight: 300;
+  }
+
+  /* ===== DONUTS SECTION ===== */
+  #donuts {
+    background: linear-gradient(160deg, #FDF0F8 0%, #F8E8F5 50%, #F2DFF0 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .donuts-decor {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.07;
+  }
+  .dd1 { width: 500px; height: 500px; background: var(--rose-deep); top: -200px; left: -100px; }
+  .dd2 { width: 300px; height: 300px; background: var(--lav-dark); bottom: -100px; right: 50px; }
+
+  .donuts-tag { background: rgba(196,123,101,0.12); color: var(--rose-deep); border: 1px solid rgba(196,123,101,0.25); }
+
+  .donuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .donut-card {
+    background: white;
+    border-radius: 28px;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255,255,255,0.8);
+    animation: cardReveal 0.6s ease both;
+  }
+  .donut-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(196,123,101,0.25);
+  }
+
+  .donut-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 28px 28px 0 0;
+  }
+  .dc-pink::before { background: linear-gradient(90deg, #F4C0D1, #ED93B1); }
+  .dc-lavender::before { background: linear-gradient(90deg, #C4B5D4, #9B7FC4); }
+  .dc-amber::before { background: linear-gradient(90deg, #FAC775, #EF9F27); }
+  .dc-teal::before { background: linear-gradient(90deg, #9FE1CB, #5DCAA5); }
+
+  .donut-emoji {
+    font-size: 72px;
+    margin-bottom: 18px;
+    display: block;
+    animation: donutSpin 0.5s ease;
+    transition: transform 0.3s;
+  }
+  .donut-card:hover .donut-emoji { transform: rotate(20deg) scale(1.2); }
+
+  .donut-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--chocolate);
+    margin-bottom: 8px;
+  }
+  .donut-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .donut-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--rose-deep);
+  }
+
+  .donut-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-new { background: rgba(93,202,165,0.15); color: var(--sage-dark); border: 1px solid rgba(93,202,165,0.3); }
+  .badge-hot { background: rgba(242,90,48,0.1); color: #C84020; border: 1px solid rgba(242,90,48,0.25); }
+
+  @keyframes cardReveal {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== DRINKS SECTION ===== */
+  #drinks {
+    background: linear-gradient(160deg, #EEF5F0 0%, #E8F2EA 50%, #DDF0E3 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .drinks-decor {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.07;
+  }
+  .drd1 { width: 450px; height: 450px; background: var(--sage-dark); top: -100px; right: -80px; }
+  .drd2 { width: 350px; height: 350px; background: var(--caramel); bottom: -80px; left: 30px; }
+
+  .drinks-tag { background: rgba(107,153,102,0.12); color: var(--sage-dark); border: 1px solid rgba(107,153,102,0.25); }
+
+  .drinks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .drink-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.9);
+  }
+  .drink-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 24px 64px rgba(107,153,102,0.25);
+  }
+
+  .drink-visual {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    transition: transform 0.3s;
+  }
+  .drink-card:hover .drink-visual { transform: scale(1.15) rotate(-5deg); }
+
+  .dv-coffee { background: rgba(139,94,60,0.1); }
+  .dv-latte { background: rgba(200,133,74,0.1); }
+  .dv-matcha { background: rgba(107,153,102,0.1); }
+  .dv-blue { background: rgba(55,138,221,0.1); }
+  .dv-strawberry { background: rgba(212,83,126,0.1); }
+  .dv-lemon { background: rgba(239,159,39,0.1); }
+
+  .drink-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--chocolate);
+    margin-bottom: 6px;
+  }
+  .drink-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .drink-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sage-dark);
+  }
+
+  /* ===== ABOUT SECTION ===== */
+  #about {
+    background: linear-gradient(135deg, #F5EDE0 0%, #EDE0D0 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-big-circle {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(200,133,74,0.25) 0%, rgba(196,123,101,0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  .about-big-circle::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    border: 2px dashed rgba(200,133,74,0.3);
+    animation: spin 20s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .abc-inner {
+    font-size: 100px;
+    animation: floatCup 3s ease-in-out infinite;
+  }
+
+  @keyframes floatCup {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(200,133,74,0.15);
+    animation: countUp 0.6s ease both;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--caramel);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .about-text-side { }
+  .about-tag { background: rgba(200,133,74,0.1); color: var(--caramel-dark); border: 1px solid rgba(200,133,74,0.2); }
+
+  .about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--chocolate);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .about-title em { font-style: italic; color: var(--caramel); }
+
+  .about-body {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+
+  .features-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text-main);
+  }
+  .feat-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .fi-caramel { background: rgba(200,133,74,0.15); }
+  .fi-rose { background: rgba(196,123,101,0.15); }
+  .fi-sage { background: rgba(107,153,102,0.15); }
+  .fi-lav { background: rgba(139,115,168,0.15); }
+
+  /* ===== RESERVATION SECTION ===== */
+  #reservation {
+    background: linear-gradient(135deg, #2C1810 0%, #3D2518 50%, #4A2E1A 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .res-decor {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.06;
+  }
+  .rd1 { width: 600px; height: 600px; background: var(--caramel); top: -200px; right: -100px; }
+  .rd2 { width: 400px; height: 400px; background: var(--rose-dust); bottom: -100px; left: -80px; }
+
+  .res-tag { background: rgba(200,133,74,0.2); color: #FAC775; border: 1px solid rgba(200,133,74,0.3); }
+
+  .res-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .res-title .gold { color: #FAC775; }
+
+  .res-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 60px;
+  }
+
+  .res-form {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-field {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 18px 22px;
+    color: white;
+    font-size: 15px;
+    font-family: 'Tajawal', sans-serif;
+    width: 100%;
+    transition: all 0.3s;
+    outline: none;
+    direction: rtl;
+  }
+  .form-field::placeholder { color: rgba(255,255,255,0.35); }
+  .form-field:focus { background: rgba(255,255,255,0.12); border-color: rgba(200,133,74,0.6); box-shadow: 0 0 0 3px rgba(200,133,74,0.15); }
+
+  .form-field-full { margin-bottom: 16px; }
+
+  .btn-reserve {
+    background: var(--caramel);
+    color: white;
+    padding: 18px 56px;
+    border-radius: 100px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: 'Tajawal', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 40px rgba(200,133,74,0.5);
+    margin-top: 8px;
+  }
+  .btn-reserve:hover { background: #D4945A; transform: translateY(-4px); box-shadow: 0 16px 56px rgba(200,133,74,0.6); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--chocolate);
+    color: rgba(255,255,255,0.7);
+    padding: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: white;
+  }
+  .footer-logo span { color: var(--rose-dust); }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--rose-dust); }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ===== ACTIVE NAV ===== */
+  .nav-links a.active { color: var(--caramel); font-weight: 700; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--chocolate);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-family: 'Tajawal', sans-serif;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+
+<nav id="main-nav">
+  <span class="nav-logo">بلانش<span>ا</span></span>
+  <ul class="nav-links">
+    <li><a href="#hero" onclick="scrollTo('hero')">الرئيسية</a></li>
+    <li><a href="#donuts" onclick="scrollTo('donuts')">الدونتس</a></li>
+    <li><a href="#drinks" onclick="scrollTo('drinks')">المشروبات</a></li>
+    <li><a href="#about" onclick="scrollTo('about')">من نحن</a></li>
+    <li><a href="#reservation" onclick="scrollTo('reservation')">احجز طاولة</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle hbc1"></div>
+  <div class="hero-bg-circle hbc2"></div>
+  <div class="hero-bg-circle hbc3"></div>
+  <div class="hero-floating-items">
+    <span class="float-item fi1">☕</span>
+    <span class="float-item fi2">🍩</span>
+    <span class="float-item fi3">🧁</span>
+    <span class="float-item fi4">🫖</span>
+    <span class="float-item fi5">🍵</span>
+    <span class="float-item fi6">🍰</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ كافيه بلانشا ✦</div>
+    <h1 class="hero-title">كل لحظة<br><span class="accent">تستحق</span> أجمل<br><span class="accent2">قهوة</span></h1>
+    <p class="hero-sub">مكانك المثالي للاسترخاء، القهوة الطازجة، والدونتس الأشهى<br>تجربة فريدة في كل زيارة</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToSection('donuts')">استعرض القائمة</button>
+      <button class="btn-outline" onclick="scrollToSection('reservation')">احجز طاولتك</button>
+    </div>
+  </div>
+</section>
+
+<!-- DONUTS -->
+<section id="donuts">
+  <div class="donuts-decor dd1"></div>
+  <div class="donuts-decor dd2"></div>
+  <div class="section-header reveal">
+    <div class="section-tag donuts-tag">🍩 الدونتس</div>
+    <h2 class="section-title">تشكيلة دونتسنا<br>المميزة</h2>
+    <p class="section-sub">معجونة بالحب، مغطاة بأحلى الحشوات والتغطيات</p>
+  </div>
+  <div class="donuts-grid">
+    <div class="donut-card dc-pink reveal reveal-delay-1">
+      <div class="donut-badge badge-hot">🔥 الأكثر طلباً</div>
+      <span class="donut-emoji">🍩</span>
+      <div class="donut-name">دونت الفراولة</div>
+      <div class="donut-desc">عجينة ناعمة محشوة بكريمة الفراولة الطازجة مع تغطية وردية لامعة</div>
+      <div class="donut-price">٢٥ ج.م</div>
+    </div>
+    <div class="donut-card dc-amber reveal reveal-delay-2">
+      <span class="donut-emoji">🍫</span>
+      <div class="donut-name">دونت الشوكولاتة</div>
+      <div class="donut-desc">قلب داكن من الشوكولاتة البلجيكية بتغطية غنية ومزيّن بالشكولاتة البيضاء</div>
+      <div class="donut-price">٢٨ ج.م</div>
+    </div>
+    <div class="donut-card dc-lavender reveal reveal-delay-3">
+      <div class="donut-badge badge-new">✨ جديد</div>
+      <span class="donut-emoji">💜</span>
+      <div class="donut-name">دونت اللافندر</div>
+      <div class="donut-desc">إبداع لافت بعجينة مع كريمة اللافندر العطرية وتغطية بنفسجية فاخرة</div>
+      <div class="donut-price">٣٠ ج.م</div>
+    </div>
+    <div class="donut-card dc-teal reveal reveal-delay-4">
+      <span class="donut-emoji">🍋</span>
+      <div class="donut-name">دونت الليمون</div>
+      <div class="donut-desc">محشوة بكريمة الليمون الحامضة المنعشة مع تغطية صفراء زاهية ومبهجة</div>
+      <div class="donut-price">٢٢ ج.م</div>
+    </div>
+    <div class="donut-card dc-pink reveal reveal-delay-1">
+      <span class="donut-emoji">🌸</span>
+      <div class="donut-name">دونت الورد</div>
+      <div class="donut-desc">رحلة رومانسية مع كريمة ماء الورد الأصيل وتزيين بتلات السكر المجفف</div>
+      <div class="donut-price">٢٧ ج.م</div>
+    </div>
+    <div class="donut-card dc-teal reveal reveal-delay-2">
+      <div class="donut-badge badge-new">✨ جديد</div>
+      <span class="donut-emoji">🫐</span>
+      <div class="donut-name">دونت التوت البري</div>
+      <div class="donut-desc">حشوة التوت البري الطازج مع زجاجة من صوص التوت فوق تغطية كريمية</div>
+      <div class="donut-price">٣٢ ج.م</div>
+    </div>
+  </div>
+</section>
+
+<!-- DRINKS -->
+<section id="drinks">
+  <div class="drinks-decor drd1"></div>
+  <div class="drinks-decor drd2"></div>
+  <div class="section-header reveal">
+    <div class="section-tag drinks-tag">☕ المشروبات</div>
+    <h2 class="section-title">مشروباتنا<br>المختارة</h2>
+    <p class="section-sub">من أجود أنواع القهوة حول العالم إلى المشروبات الباردة المنعشة</p>
+  </div>
+  <div class="drinks-grid">
+    <div class="drink-card reveal reveal-delay-1">
+      <div class="drink-visual dv-coffee">☕</div>
+      <div class="drink-name">إسبريسو دبل</div>
+      <div class="drink-sub">تركيز عالي من أفضل حبوب الأرابيكا الإثيوبية</div>
+      <div class="drink-price">٣٥ ج.م</div>
+    </div>
+    <div class="drink-card reveal reveal-delay-2">
+      <div class="drink-visual dv-latte">🥛</div>
+      <div class="drink-name">لاتيه الكراميل</div>
+      <div class="drink-sub">إسبريسو ناعم مع حليب مبخر وصوص كراميل ذهبي</div>
+      <div class="drink-price">٤٥ ج.م</div>
+    </div>
+    <div class="drink-card reveal reveal-delay-3">
+      <div class="drink-visual dv-matcha">🍵</div>
+      <div class="drink-name">ماتشا لاتيه</div>
+      <div class="drink-sub">مسحوق الماتشا الياباني الفاخر مع حليب اللوز الكريمي</div>
+      <div class="drink-price">٥٠ ج.م</div>
+    </div>
+    <div class="drink-card reveal reveal-delay-4">
+      <div class="drink-visual dv-blue">🫐</div>
+      <div class="drink-name">بلو لاتيه</div>
+      <div class="drink-sub">مشروب البابا فرق النادر مع لبن مبخر ورغوة ناعمة</div>
+      <div class="drink-price">٥٥ ج.م</div>
+    </div>
+    <div class="drink-card reveal reveal-delay-1">
+      <div class="drink-visual dv-strawberry">🍓</div>
+      <div class="drink-name">فرابيه فراولة</div>
+      <div class="drink-sub">عصير فراولة طازج مثلوج مع كريمة طازجة وقطع فراولة</div>
+      <div class="drink-price">٤٨ ج.م</div>
+    </div>
+    <div class="drink-card reveal reveal-delay-2">
+      <div class="drink-visual dv-lemon">🍋</div>
+      <div class="drink-name">ليمونادة النعناع</div>
+      <div class="drink-sub">ليمون طازج معصور مع النعناع الأخضر والمثلجات المنعشة</div>
+      <div class="drink-price">٣٨ ج.م</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-content">
+    <div class="about-visual reveal">
+      <div class="about-big-circle">
+        <div class="abc-inner">☕</div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">+٥٠</div>
+          <div class="stat-label">نوع من المشروبات</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">+٢٠</div>
+          <div class="stat-label">نكهة دونتس يومياً</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">٨</div>
+          <div class="stat-label">سنوات من الشغف</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">★٤.٩</div>
+          <div class="stat-label">تقييم العملاء</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text-side reveal reveal-delay-2">
+      <div class="section-tag about-tag" style="display:inline-block;margin-bottom:16px;font-size:12px;font-weight:700;letter-spacing:2px;padding:6px 20px;border-radius:100px;">من نحن</div>
+      <h2 class="about-title">مكان يجمعك<br>بأجمل <em>اللحظات</em></h2>
+      <p class="about-body">في كافيه بلانشا، نؤمن أن كل قهوة تحكي قصة وكل دونتس يصنع ذكرى. منذ ٢٠١٦، نحرص على تقديم تجربة لا تُنسى في قلب المدينة، مع أجود الخامات وأكثر الوصفات ابتكاراً.</p>
+      <ul class="features-list">
+        <li>
+          <div class="feat-icon fi-caramel">☕</div>
+          حبوب قهوة مختارة من أفضل مزارع العالم
+        </li>
+        <li>
+          <div class="feat-icon fi-rose">🍩</div>
+          دونتس طازجة يومياً بمكونات طبيعية
+        </li>
+        <li>
+          <div class="feat-icon fi-sage">🌿</div>
+          مكونات عضوية ومحلية بقدر الإمكان
+        </li>
+        <li>
+          <div class="feat-icon fi-lav">✨</div>
+          جو هادئ ومريح مصمم للإلهام والراحة
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reservation">
+  <div class="res-decor rd1"></div>
+  <div class="res-decor rd2"></div>
+  <div class="section-tag res-tag" style="display:inline-block;font-size:12px;font-weight:700;letter-spacing:3px;margin-bottom:20px;">📅 الحجز</div>
+  <h2 class="res-title">احجز طاولتك<br>الآن <span class="gold">معنا</span></h2>
+  <p class="res-sub">خصص وقتك واستمتع بتجربة لا تنسى في بلانشا</p>
+  <div class="res-form reveal">
+    <div class="form-row">
+      <input type="text" class="form-field" placeholder="الاسم الكامل" />
+      <input type="tel" class="form-field" placeholder="رقم الهاتف" />
+    </div>
+    <div class="form-row">
+      <input type="date" class="form-field" />
+      <select class="form-field" style="cursor:pointer;">
+        <option value="" disabled selected>عدد الأشخاص</option>
+        <option>شخص واحد</option>
+        <option>شخصان</option>
+        <option>٣ - ٤ أشخاص</option>
+        <option>٥ - ٦ أشخاص</option>
+        <option>٧ أشخاص أو أكثر</option>
+      </select>
+    </div>
+    <textarea class="form-field form-field-full" rows="3" placeholder="ملاحظات خاصة (اختياري)..."></textarea>
+    <button class="btn-reserve" onclick="handleReserve()">تأكيد الحجز ✦</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">بلانش<span>ا</span></div>
+  <ul class="footer-links">
+    <li><a onclick="scrollToSection('hero')">الرئيسية</a></li>
+    <li><a onclick="scrollToSection('donuts')">الدونتس</a></li>
+    <li><a onclick="scrollToSection('drinks')">المشروبات</a></li>
+    <li><a onclick="scrollToSection('about')">من نحن</a></li>
+    <li><a onclick="scrollToSection('reservation')">احجز طاولة</a></li>
+  </ul>
+  <div class="footer-copy">© ٢٠٢٥ كافيه بلانشا — صُنع بـ ❤️ وقهوة</div>
+</footer>
+
+<div class="toast" id="toast">✅ تم استلام حجزك! سنتواصل معك قريباً</div>
+
+<script>
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleReserve() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+const sections = ['hero','donuts','drinks','about','reservation'];
+const navLinks = document.querySelectorAll('.nav-links a');
+const sectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = e.target.id;
+      const active = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObs.observe(el);
+});
+
+document.querySelectorAll('.donut-card').forEach((card, i) => {
+  card.style.animationDelay = (i * 0.1) + 's';
+});
+</script>
